@@ -7,7 +7,7 @@ import 'package:ride_os/pages/home/mapbox_page.dart';
 
 final router = FluroRouter();
 
-Version appVersion = new Version("1.4.0+1");
+Version appVersion = new Version("1.6.0+1");
 
 bool driveMode = true;
 

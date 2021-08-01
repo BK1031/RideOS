@@ -192,15 +192,6 @@ class _SkeletonPageState extends State<SkeletonPage> {
                             });
                           }
                         }
-                        // else if (state == "mapbox") {
-                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //     content: Text("Menu is disabled during navigation!", style: TextStyle(color: currTextColor),),
-                        //     backgroundColor: currBackgroundColor.withOpacity(0.8),
-                        //     behavior: SnackBarBehavior.floating,
-                        //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                        //     width: 200,
-                        //   ));
-                        // }
                         else {
                           setState(() {
                             state = "menu";
@@ -221,6 +212,14 @@ class _SkeletonPageState extends State<SkeletonPage> {
                         setState(() {
                           driveMode = !driveMode;
                         });
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("${driveMode ? "Drive" : "Bike"} mode activated!", style: TextStyle(color: currTextColor), textAlign: TextAlign.center,),
+                          backgroundColor: currBackgroundColor.withOpacity(0.8),
+                          behavior: SnackBarBehavior.floating,
+                          duration: const Duration(seconds: 1),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                          width: 200,
+                        ));
                       },
                     ),
                   ),
@@ -232,7 +231,7 @@ class _SkeletonPageState extends State<SkeletonPage> {
                       padding: EdgeInsets.all(0),
                       color: currCardColor,
                       onPressed: () {
-
+                        // TODO: Parking feature
                       },
                     ),
                   ),

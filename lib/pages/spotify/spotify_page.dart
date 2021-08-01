@@ -131,7 +131,7 @@ class _SpotifyPageState extends State<SpotifyPage> {
           playlists.add(InkWell(
             borderRadius: BorderRadius.all(Radius.circular(8)),
             onTap: () {
-
+              play(responseJson["items"][i]["uri"]);
             },
             child: Container(
               padding: EdgeInsets.all(8),
@@ -310,23 +310,10 @@ class _SpotifyPageState extends State<SpotifyPage> {
     }
   }
 
-  Future getCrossfadeState() async {
-    try {
-      var crossfadeStateValue = await SpotifySdk.getCrossFadeState();
-      setState(() {
-        crossfadeState = crossfadeStateValue;
-      });
-    } on PlatformException catch (e) {
-      setStatus(e.code, message: e.message);
-    } on MissingPluginException {
-      setStatus('not implemented');
-    }
-  }
-
-  Future<void> queue() async {
+  Future<void> queue(String uri) async {
     try {
       await SpotifySdk.queue(
-          spotifyUri: 'spotify:track:58kNJana4w5BIjlZE2wq5m');
+          spotifyUri: uri);
     } on PlatformException catch (e) {
       setStatus(e.code, message: e.message);
     } on MissingPluginException {
@@ -378,9 +365,9 @@ class _SpotifyPageState extends State<SpotifyPage> {
     }
   }
 
-  Future<void> play() async {
+  Future<void> play(String uri) async {
     try {
-      await SpotifySdk.play(spotifyUri: 'spotify:track:58kNJana4w5BIjlZE2wq5m');
+      await SpotifySdk.play(spotifyUri: uri);
     } on PlatformException catch (e) {
       setStatus(e.code, message: e.message);
     } on MissingPluginException {
@@ -441,17 +428,6 @@ class _SpotifyPageState extends State<SpotifyPage> {
   Future<void> seekToRelative() async {
     try {
       await SpotifySdk.seekToRelativePosition(relativeMilliseconds: 20000);
-    } on PlatformException catch (e) {
-      setStatus(e.code, message: e.message);
-    } on MissingPluginException {
-      setStatus('not implemented');
-    }
-  }
-
-  Future<void> addToLibrary() async {
-    try {
-      await SpotifySdk.addToLibrary(
-          spotifyUri: 'spotify:track:58kNJana4w5BIjlZE2wq5m');
     } on PlatformException catch (e) {
       setStatus(e.code, message: e.message);
     } on MissingPluginException {

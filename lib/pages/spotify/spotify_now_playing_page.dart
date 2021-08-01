@@ -360,6 +360,7 @@ class _SpotifyNowPlayingPageState extends State<SpotifyNowPlayingPage> {
       setState(() {
         _loading = false;
       });
+      getAuthenticationToken();
       setStatus(e.code, message: e.message);
     } on MissingPluginException {
       setState(() {

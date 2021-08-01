@@ -179,20 +179,28 @@ class _SkeletonPageState extends State<SkeletonPage> {
                       onPressed: () {
                         HapticFeedback.heavyImpact();
                         if (state == "menu") {
-                          setState(() {
-                            state = "home";
-                            body = HomePage();
-                          });
+                          if (navigating) {
+                            setState(() {
+                              state = "mapbox";
+                              body = mapboxWidget;
+                            });
+                          }
+                          else {
+                            setState(() {
+                              state = "home";
+                              body = HomePage();
+                            });
+                          }
                         }
-                        else if (state == "mapbox") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Menu is disabled during navigation!", style: TextStyle(color: currTextColor),),
-                            backgroundColor: currBackgroundColor.withOpacity(0.8),
-                            behavior: SnackBarBehavior.floating,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                            width: 200,
-                          ));
-                        }
+                        // else if (state == "mapbox") {
+                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //     content: Text("Menu is disabled during navigation!", style: TextStyle(color: currTextColor),),
+                        //     backgroundColor: currBackgroundColor.withOpacity(0.8),
+                        //     behavior: SnackBarBehavior.floating,
+                        //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                        //     width: 200,
+                        //   ));
+                        // }
                         else {
                           setState(() {
                             state = "menu";

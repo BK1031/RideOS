@@ -15,6 +15,8 @@ bool debug = false;
 
 String state = "home";
 Widget body = HomePage();
+Widget mapboxWidget = Container();
+bool navigating = false;
 
 String mapDayTheme = "";
 String mapDayPlainTheme = "";

@@ -54,14 +54,17 @@ class _MapBoxPageState extends State<MapBoxPage> {
     super.dispose();
     positionStream!.cancel();
     _controller!.clearRoute();
+    _controller!.finishNavigation();
   }
 
   Future<void> getLocation() async {
     positionStream = Geolocator.getPositionStream().listen((Position position) {
       print(position == null ? 'Unknown' : position.latitude.toString() + ', ' + position.longitude.toString());
-      setState(() {
-        this.position = position;
-      });
+      if (mounted) {
+        setState(() {
+          this.position = position;
+        });
+      }
       print(position.speed);
     });
   }
@@ -97,9 +100,6 @@ class _MapBoxPageState extends State<MapBoxPage> {
         latitude: end.latitude,
         longitude: end.longitude);
     await _controller!.buildRoute(wayPoints: [_origin, _stop1]);
-    setState(() {
-      state = "mapbox";
-    });
     _controller!.startNavigation();
   }
 
@@ -114,49 +114,36 @@ class _MapBoxPageState extends State<MapBoxPage> {
         break;
       case MapBoxEvent.route_building:
       case MapBoxEvent.route_built:
-        setState(() {
-          _routeBuilt = true;
-        });
+        _routeBuilt = true;
         break;
       case MapBoxEvent.route_build_failed:
-        setState(() {
-          _routeBuilt = false;
-        });
+        _routeBuilt = false;
         break;
       case MapBoxEvent.navigation_running:
-        setState(() {
-          _isNavigating = true;
-        });
+        _isNavigating = true;
         break;
       case MapBoxEvent.on_arrival:
         print("arrived!");
         await Future.delayed(Duration(seconds: 3));
         await _controller!.finishNavigation();
-        setState(() {
-          state = "home";
-        });
+        state = "home";
         break;
       case MapBoxEvent.navigation_finished:
         print("finished!");
         await Future.delayed(Duration(seconds: 3));
         await _controller!.finishNavigation();
-        setState(() {
-          state = "home";
-        });
+        state = "home";
         break;
       case MapBoxEvent.navigation_cancelled:
         await Future.delayed(Duration(seconds: 3));
         await _controller!.finishNavigation();
-        setState(() {
-          _routeBuilt = false;
-          _isNavigating = false;
-          state = "home";
-        });
+        _routeBuilt = false;
+        _isNavigating = false;
         break;
       default:
         break;
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
@@ -182,25 +169,17 @@ class _MapBoxPageState extends State<MapBoxPage> {
                           Expanded(
                             child: CupertinoButton(
                               padding: EdgeInsets.zero,
-                              color: currCardColor,
-                              child: Icon(CupertinoIcons.clear_thick_circled),
+                              color: Colors.red,
+                              child: Text("End"),
                               onPressed: () async {
+                                state = "home";
+                                navigating = false;
                                 body = HomePage();
-                                router.navigateTo(context, "/home", transition: TransitionType.fadeIn, replace: true);
+                                mapboxWidget = Container();
                               },
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(8),),
-                          Expanded(
-                            child: CupertinoButton(
-                              padding: EdgeInsets.zero,
-                              color: currCardColor,
-                              child: Icon(CupertinoIcons.location_fill),
-                              onPressed: () async {
-                                startNavigation();
-                              },
-                            ),
-                          ),
                           Container(
                             padding: EdgeInsets.all(8),
                             child: Card(

@@ -53,9 +53,11 @@ class _HomePageState extends State<HomePage> {
             bearing: position.heading
         )));
       }
-      setState(() {
-        this.position = position;
-      });
+      if (mounted) {
+        setState(() {
+          this.position = position;
+        });
+      }
     });
   }
 
@@ -176,6 +178,13 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             setState(() {
                               body = MapBoxPage(
+                                LatLng(json.decode(directions.body)["routes"][0]["legs"][0]["start_location"]["lat"], json.decode(directions.body)["routes"][0]["legs"][0]["start_location"]["lng"]),
+                                LatLng(json.decode(directions.body)["routes"][0]["legs"][0]["end_location"]["lat"], json.decode(directions.body)["routes"][0]["legs"][0]["end_location"]["lng"]),
+                                json.decode(response.body)["result"]["name"]
+                              );
+                              state = "mapbox";
+                              navigating = true;
+                              mapboxWidget = MapBoxPage(
                                 LatLng(json.decode(directions.body)["routes"][0]["legs"][0]["start_location"]["lat"], json.decode(directions.body)["routes"][0]["legs"][0]["start_location"]["lng"]),
                                 LatLng(json.decode(directions.body)["routes"][0]["legs"][0]["end_location"]["lat"], json.decode(directions.body)["routes"][0]["legs"][0]["end_location"]["lng"]),
                                 json.decode(response.body)["result"]["name"]

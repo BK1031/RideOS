@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 
 bool darkMode = false;
 
-final mainColor = Color(0xFF2db1ff);
+final mainColor = Color(0xFF2CB1FF);
 final spotifyColor = Color(0xFF1db954);
 final successColor = Color(0xFF58BA5B);
 final warningColor = Color(0xFFF2C94C);

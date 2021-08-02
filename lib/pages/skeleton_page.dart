@@ -16,6 +16,7 @@ import 'package:ride_os/utils/secret.dart';
 import 'package:ride_os/utils/theme.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 import 'package:spotify_sdk/models/connection_status.dart';
@@ -74,6 +75,11 @@ class _SkeletonPageState extends State<SkeletonPage> {
     weather = await wf.currentWeatherByLocation(position.latitude, position.longitude);
     // print("Weather: $weather");
     setState(() {});
+  }
+
+  Future<void> getParking() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // TODO: Parking feature
   }
 
   @override
@@ -231,7 +237,7 @@ class _SkeletonPageState extends State<SkeletonPage> {
                       padding: EdgeInsets.all(0),
                       color: currCardColor,
                       onPressed: () {
-                        // TODO: Parking feature
+                        getParking();
                       },
                     ),
                   ),

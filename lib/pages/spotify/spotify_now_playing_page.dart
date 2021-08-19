@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui';
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +9,8 @@ import 'package:logger/logger.dart';
 import 'package:ride_os/utils/config.dart';
 import 'package:ride_os/utils/secret.dart';
 import 'package:ride_os/utils/theme.dart';
-import 'package:spotify_sdk/models/connection_status.dart';
 import 'package:spotify_sdk/models/crossfade_state.dart';
 import 'package:spotify_sdk/models/image_uri.dart';
-import 'package:spotify_sdk/models/player_context.dart';
 import 'package:spotify_sdk/models/player_state.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
 
@@ -32,8 +28,8 @@ class _SpotifyNowPlayingPageState extends State<SpotifyNowPlayingPage> {
 
   List<Widget> playlists = [];
 
-  String imageUri = "";
-  Image cover = Image.asset("images/play_button");
+  String? imageUri = "";
+  Image? cover = Image.asset("images/play_button");
 
   Timer? timer;
 
@@ -337,7 +333,7 @@ class _SpotifyNowPlayingPageState extends State<SpotifyNowPlayingPage> {
             }
           });
     }
-    else return cover;
+    else return cover != null ? cover! : Image.asset("images/play_button");
   }
 
   Future<void> connectToSpotifyRemote() async {

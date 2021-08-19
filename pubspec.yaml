@@ -35,10 +35,6 @@ dependencies:
   url_strategy: ^0.2.0
   google_maps_flutter: ^2.0.6
   geolocator: ^7.3.1
-  cool_alert: ^1.1.0
-  rounded_loading_button: ^2.0.5
-  progress_indicators: ^1.0.0
-  skeleton_text: ^3.0.0
   shared_preferences: ^2.0.6
   connectivity_plus: ^1.0.6
   flutter_mapbox_navigation: ^0.0.26

@@ -45,8 +45,8 @@ class _SkeletonPageState extends State<SkeletonPage> {
 
   CrossfadeState? crossfadeState;
 
-  String imageUri = "";
-  Image cover = Image.asset("images/play_button");
+  String? imageUri = "";
+  Image? cover = Image.asset("images/play_button");
 
   Future<void> getBattery() async {
     var battery = Battery();
@@ -455,7 +455,7 @@ class _SkeletonPageState extends State<SkeletonPage> {
             }
           });
     }
-    else return cover;
+    else return cover != null ? cover! : Image.asset("images/play_button");
   }
 
   Future<void> pause() async {

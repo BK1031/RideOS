@@ -1,6 +1,7 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:rideos/config/theme.dart';
 class AlertService {
 
   static showSuccessAlert() {
@@ -13,7 +14,7 @@ class AlertService {
       desktopSnackBarPosition: DesktopSnackBarPosition.bottomRight,
       builder: (context) {
         return Card(
-          color: SB_GREEN,
+          color: SUCCESS_COLOR,
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Row(
@@ -61,7 +62,7 @@ class AlertService {
       desktopSnackBarPosition: DesktopSnackBarPosition.bottomRight,
       builder: (context) {
         return Card(
-          color: SB_RED,
+          color: ERROR_COLOR,
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Row(

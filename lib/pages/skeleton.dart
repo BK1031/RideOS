@@ -1,8 +1,12 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:rideos/config/config.dart';
 import 'package:rideos/pages/map/mapbox_page.dart';
 import 'package:rideos/utils/alert_service.dart';
+import 'package:rideos/utils/logger.dart';
 
 class SkeletonPage extends StatefulWidget {
   const SkeletonPage({super.key});
@@ -13,10 +17,18 @@ class SkeletonPage extends StatefulWidget {
 
 class _SkeletonPageState extends State<SkeletonPage> {
 
+  StreamSubscription<Position>? positionStream;
+
   @override
   void initState() {
     super.initState();
     _determinePosition();
+  }
+
+  @override
+  void dispose() {
+    positionStream?.cancel();
+    super.dispose();
   }
 
   Future<void> _determinePosition() async {
@@ -39,9 +51,9 @@ class _SkeletonPageState extends State<SkeletonPage> {
       AlertService.showErrorDialog(context, "Location Error", "Location permissions are permanently denied, we cannot request permissions.", null);
     }
 
-    Geolocator.getPositionStream().listen((Position position) {
+    positionStream = Geolocator.getPositionStream().listen((Position position) {
       currentPosition = position;
-      logger.log("Location: ${position.latitude}, ${position.longitude}");
+      logger.log("Position: ${position.toJson()}", LogLevel.debug);
     });
   }
 

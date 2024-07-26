@@ -15,11 +15,11 @@ class MapboxPage extends StatefulWidget {
 class _MapboxPageState extends State<MapboxPage> {
 
   MapboxMapController? mapController;
+  Position? localPosition;
 
   @override
   void initState() {
     super.initState();
-    _determinePosition();
   }
 
   Future<void> _determinePosition() async {
@@ -35,29 +35,63 @@ class _MapboxPageState extends State<MapboxPage> {
           target: LatLng(position.latitude, position.longitude),
           zoom: 16.0,
           bearing: position.heading,
-          tilt: 45.0,
+          tilt: 60.0,
         ),
       ));
+      setState(() {
+        localPosition = position;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MapboxMap(
-        accessToken: MAPBOX_PUBLIC_TOKEN,
-        onMapCreated: (MapboxMapController controller) {
-          mapController = controller;
-        },
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(37.7749, -122.4194),
-          zoom: 11.0,
-        ),
-        attributionButtonMargins: const Point(-32, -32),
-        compassEnabled: false,
-        logoViewMargins: const Point(-32, -32),
-        trackCameraPosition: true,
-        myLocationEnabled: true,
+      body: Stack(
+        children: [
+          MapboxMap(
+            accessToken: MAPBOX_PUBLIC_TOKEN,
+            onMapCreated: (MapboxMapController controller) {
+              mapController = controller;
+              _determinePosition();
+            },
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(37.7749, -122.4194),
+              zoom: 11.0,
+            ),
+            attributionButtonMargins: const Point(-32, -32),
+            compassEnabled: false,
+            logoViewMargins: const Point(-32, -32),
+            trackCameraPosition: true,
+            myLocationEnabled: true,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 16),
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "${localPosition != null ? (localPosition!.speed * 2.23694).round() : 0}",
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 32),
+                        ),
+                        Text(
+                          "MPH",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

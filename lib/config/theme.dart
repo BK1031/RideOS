@@ -27,50 +27,50 @@ CardLoadingTheme getCardLoadingTheme(context) => CardLoadingTheme(
 );
 
 /// LIGHT STYLE
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  colorScheme: const ColorScheme.light().copyWith(
-    primary: ACTIVE_ACCENT_COLOR,
-    secondary: ACTIVE_ACCENT_COLOR,
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
-    surface: Colors.transparent,
-    surfaceTint: Colors.transparent,
-    onSurface: lightBackgroundColor
-  ),
-  fontFamily: "Product Sans",
-  primaryColor: ACTIVE_ACCENT_COLOR,
-  scaffoldBackgroundColor: lightBackgroundColor,
-  cardColor: lightCardColor,
-  appBarTheme: AppBarTheme(
-    foregroundColor: Colors.white,
-    color: ACTIVE_ACCENT_COLOR,
-    centerTitle: true,
-    systemOverlayStyle: SystemUiOverlayStyle.light,
-  ),
-  cardTheme: CardTheme(
-    color: lightCardColor,
-    elevation: 0,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  ),
-  listTileTheme: ListTileThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  ),
-  buttonTheme: ButtonThemeData(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
-  ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: ACTIVE_ACCENT_COLOR,
-    foregroundColor: Colors.white,
-  ),
-  dividerColor: lightDividerColor,
-  dialogBackgroundColor: lightCardColor,
-  popupMenuTheme: PopupMenuThemeData(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-    ),
-  ),
-);
+// final ThemeData lightTheme = ThemeData(
+//   brightness: Brightness.light,
+//   colorScheme: const ColorScheme.light().copyWith(
+//     primary: ACTIVE_ACCENT_COLOR,
+//     secondary: ACTIVE_ACCENT_COLOR,
+//     onPrimary: Colors.white,
+//     onSecondary: Colors.white,
+//     surface: Colors.transparent,
+//     surfaceTint: Colors.transparent,
+//     onSurface: lightBackgroundColor
+//   ),
+//   fontFamily: "Product Sans",
+//   primaryColor: ACTIVE_ACCENT_COLOR,
+//   scaffoldBackgroundColor: lightBackgroundColor,
+//   cardColor: lightCardColor,
+//   appBarTheme: AppBarTheme(
+//     foregroundColor: Colors.white,
+//     color: ACTIVE_ACCENT_COLOR,
+//     centerTitle: true,
+//     systemOverlayStyle: SystemUiOverlayStyle.light,
+//   ),
+//   cardTheme: CardTheme(
+//     color: lightCardColor,
+//     elevation: 0,
+//     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+//   ),
+//   listTileTheme: ListTileThemeData(
+//     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+//   ),
+//   buttonTheme: ButtonThemeData(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
+//   ),
+//   floatingActionButtonTheme: FloatingActionButtonThemeData(
+//     backgroundColor: ACTIVE_ACCENT_COLOR,
+//     foregroundColor: Colors.white,
+//   ),
+//   dividerColor: lightDividerColor,
+//   dialogBackgroundColor: lightCardColor,
+//   popupMenuTheme: PopupMenuThemeData(
+//     shape: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.circular(8),
+//     ),
+//   ),
+// );
 
 /// DARK STYLE
 final ThemeData darkTheme = ThemeData(
@@ -96,7 +96,7 @@ final ThemeData darkTheme = ThemeData(
     systemOverlayStyle: SystemUiOverlayStyle.light,
   ),
   cardTheme: CardTheme(
-    color: darkCardColor,
+    color: darkCardColor.withOpacity(0.8),
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
@@ -116,7 +116,6 @@ final ThemeData darkTheme = ThemeData(
   ),
   dividerColor: darkDividerColor,
   dialogBackgroundColor: darkCardColor,
-  // textTheme: GoogleFonts.openSansTextTheme(ThemeData.dark().textTheme),
   popupMenuTheme: PopupMenuThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(6),

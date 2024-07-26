@@ -1,4 +1,5 @@
 import 'package:fluro/fluro.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:rideos/models/version.dart';
@@ -17,3 +18,5 @@ Version appVersion = Version("2.0.0+1");
 String MAPBOX_PUBLIC_TOKEN = "mapbox-public-token";
 String MAPBOX_ACCESS_TOKEN = "mapbox-access-token";
 String WEATHER_API_KEY = "weather-api-key";
+
+Position? currentPosition;

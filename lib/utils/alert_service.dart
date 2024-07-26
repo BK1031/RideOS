@@ -96,7 +96,7 @@ class AlertService {
     );
   }
 
-  static showWarningDialog(BuildContext context, String title, String message, Function onConfirm) {
+  static showWarningDialog(BuildContext context, String title, String message, Function? onConfirm) {
     CoolAlert.show(
       context: context,
       width: 300,
@@ -105,12 +105,12 @@ class AlertService {
       text: message,
       confirmBtnText: "OK",
       confirmBtnColor: ACTIVE_ACCENT_COLOR,
-      onConfirmBtnTap: () => onConfirm(),
+      onConfirmBtnTap: () => onConfirm ?? Navigator.pop(context),
       backgroundColor: ACTIVE_ACCENT_COLOR,
     );
   }
 
-  static showErrorDialog(BuildContext context, String title, String message, Function onConfirm) {
+  static showErrorDialog(BuildContext context, String title, String message, Function? onConfirm) {
     CoolAlert.show(
       context: context,
       width: 300,
@@ -119,12 +119,12 @@ class AlertService {
       text: message,
       confirmBtnText: "OK",
       confirmBtnColor: ACTIVE_ACCENT_COLOR,
-      onConfirmBtnTap: () => onConfirm(),
+      onConfirmBtnTap: () => onConfirm ?? Navigator.pop(context),
       backgroundColor: ACTIVE_ACCENT_COLOR,
     );
   }
 
-  static showSuccessDialog(BuildContext context, String title, String message, Function onConfirm) {
+  static showSuccessDialog(BuildContext context, String title, String message, Function? onConfirm) {
     CoolAlert.show(
       context: context,
       width: 300,
@@ -133,7 +133,7 @@ class AlertService {
       text: message,
       confirmBtnText: "OK",
       confirmBtnColor: ACTIVE_ACCENT_COLOR,
-      onConfirmBtnTap: () => onConfirm(),
+      onConfirmBtnTap: () => onConfirm ?? Navigator.pop(context),
       backgroundColor: ACTIVE_ACCENT_COLOR,
     );
   }
